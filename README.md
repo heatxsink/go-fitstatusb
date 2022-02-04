@@ -1,6 +1,6 @@
 # go-fitstatusb
 
-A golang wrapper module to interact with [fit-statUSB](https://fit-iot.com/web/product/fit-statusb/) device over serial.
+A golang wrapper module to interact with [fit-statUSB](https://fit-iot.com/web/product/fit-statusb/) device over serial. This is experimental at best, not ready for production.
 
 ## Background
 

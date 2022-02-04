@@ -35,3 +35,7 @@ func (fsu *FitStatUSB) Write(value string) error {
 	}
 	return nil
 }
+
+func (fsu *FitStatUSB) Close() error {
+	return fsu.port.Close()
+}
