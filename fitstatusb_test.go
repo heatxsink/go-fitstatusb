@@ -9,7 +9,7 @@ var fsu *FitStatUSB
 
 func TestSetup(t *testing.T) {
 	var err error
-	fsu, err = New()
+	fsu, err = New("/dev/ttyACM0", 9600)
 	if err != nil {
 		t.Error(err)
 	}
