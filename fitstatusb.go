@@ -7,35 +7,31 @@ import (
 )
 
 type FitStatUSB struct {
-	baudRate int
 	portName string
-	port     serial.Port
+	mode     *serial.Mode
 }
 
-func New() (*FitStatUSB, error) {
+func New(portName string, baudRate int) (*FitStatUSB, error) {
 	fsu := &FitStatUSB{
-		baudRate: 9600,
-		portName: "/dev/ttyACM0",
-	}
-	mode := &serial.Mode{
-		BaudRate: fsu.baudRate,
-	}
-	var err error
-	fsu.port, err = serial.Open(fsu.portName, mode)
-	if err != nil {
-		return nil, err
+		portName: portName,
+		mode: &serial.Mode{
+			BaudRate: baudRate,
+		},
 	}
 	return fsu, nil
 }
 
 func (fsu *FitStatUSB) Write(value string) error {
-	_, err := fsu.port.Write([]byte(fmt.Sprintf("%s\n\r", value)))
+	var err error
+	port, err := serial.Open(fsu.portName, fsu.mode)
 	if err != nil {
 		return err
 	}
+	_, err = port.Write([]byte(fmt.Sprintf("%s\n\r", value)))
+	if err != nil {
+		port.Close()
+		return err
+	}
+	port.Close()
 	return nil
-}
-
-func (fsu *FitStatUSB) Close() error {
-	return fsu.port.Close()
 }
