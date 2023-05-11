@@ -10,6 +10,16 @@ Found `fit-statUSB` on [Amazon](https://www.amazon.com/dp/B07CKFLQ5V) on a whim.
 
 Technical documentation for `fit-statUSB` is located at: <http://fit-pc.com/wiki/index.php/Fit-statUSB>
 
+## Troubleshooting
+
+I'm getting  a `permission denied` when running `go test`?
+
+Try adding your `$USER` to the `dialout` group.
+
+    `sudo adduser $USER dialout`
+
+Logout of `$USER` account for changes to be applied.
+
 ## Caveats
 
 * Right now this only works on Linux, would love to support Windows, and macOS.
